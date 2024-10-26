@@ -1,4 +1,3 @@
-# Fitness-Management-web-app
 # Fitness-Management-Web-App
 
 ## Overview
