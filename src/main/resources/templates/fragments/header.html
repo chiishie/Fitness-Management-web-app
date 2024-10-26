@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html dir="ltr"
+      lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Fitness Management App</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<style>
+    body {
+        font-family: math;
+    }
+
+    :root {
+        --default-font: "Roboto, sans-serif";
+    }
+
+    .cart-icon {
+        position: relative;
+        font-size: 1.5rem;
+    }
+
+    .cart-icon .cart-count {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 0.75rem;
+    }
+</style>
+<body>
+<nav th:fragment="navbar">
+    <div class="logo">
+        <img th:src="@{/images/sander-favicon.png}" alt="logo"/>
+        <h1><a th:href="@{/}">Fitness Management App</a></h1>
+    </div>
+    <ul>
+        <li>
+            <a th:href="@{/}">Home</a>
+        </li>
+
+        <li sec:authorize="!isAuthenticated()">
+            <a th:href="@{/register}">Register</a>
+        </li>
+
+        <li sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}">Login</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">
+            <a th:href="@{/users}">Users</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER')">
+            <a th:href="@{/}">Food Tracking</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER')">
+            <a th:href="@{/}">Health Data Management</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/profile}">Profile</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated()">
+            <a style="background: red;color: white" th:href="@{/logout}">Logout</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated()">
+            Hi, <span th:text="${session.firstName}"></span>
+        </li>
+    </ul>
+    <div class="hamburger">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+    </div>
+</nav>
+<div class="menubar">
+    <ul>
+        <li>
+            <a th:href="@{/}">Home</a>
+        </li>
+
+        <li sec:authorize="!isAuthenticated()">
+            <a th:href="@{/register}">Register</a>
+        </li>
+
+        <li sec:authorize="!isAuthenticated()">
+            <a th:href="@{/login}">Login</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">
+            <a th:href="@{/users}">Users</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('ADMIN')">
+            <a th:href="@{/users}">Users</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER')">
+            <a th:href="@{/}">Food Tracking</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated() and hasAuthority('CUSTOMER')">
+            <a th:href="@{/}">Health Data Management</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/profile}">Profile</a>
+        </li>
+
+
+        <li sec:authorize="isAuthenticated()">
+            <a style="background: red;color: white" th:href="@{/logout}">Logout</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated()">
+            Hi, <span th:text="${session.firstName}"></span>
+        </li>
+    </ul>
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<style>
+    nav {
+        padding: 20px 5%;
+    }
+
+    .container {
+        border-radius: 20px !important;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+</style>
+<body style="background: white">
+<div th:replace="~{fragments/header :: navbar}"></div>
+
+<div class="container">
+    <div class="title">Login</div>
+    <div class="content">
+        <form method="POST" th:action="@{/login}">
+            <div class="row" th:if="${param.error}">
+                <p style="text-align: center; color: red; font-size: 22px;">Please check your credentials !</p>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input id="email" name="email" placeholder="Enter your email" required type="text"
+                           th:value="${param.email != null ? param.email : ''}">
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input id="password" name="password" placeholder="Enter your password" required type="password">
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

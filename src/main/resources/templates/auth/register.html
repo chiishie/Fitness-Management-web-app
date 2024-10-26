@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<style>
+    nav {
+        padding: 20px 5%;
+    }
+
+    .container {
+        border-radius: 20px !important;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+</style>
+<body style="background: white">
+<div th:replace="~{fragments/header :: navbar}"></div>
+
+<div class="container">
+    <div class="title">Register</div>
+    <div class="content">
+        <form method="post" th:action="@{/register/submit}" th:object="${user}">
+            <div class="row" th:if="${success}">
+                <hr>
+                <p style="text-align: center; color: green; font-size: 22px;"><strong>You're successfully registered
+                    !</strong></p>
+                <hr>
+                <br>
+            </div>
+
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Full Name</span>
+                    <input required th:field="*{fullName}" type="text">
+                    <span class="text-danger" th:errors="*{fullName}"
+                          th:if="${#fields.hasErrors('fullName')}"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input required th:field="*{email}" type="email">
+                    <span class="text-danger" th:errors="*{email}"
+                          th:if="${#fields.hasErrors('email')}"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input required th:field="*{password}" type="password">
+                    <span class="text-danger" th:errors="*{password}"
+                          th:if="${#fields.hasErrors('password')}"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Address:</span>
+                    <input required th:field="*{address}" type="text"/>
+                    <span class="text-danger" th:errors="*{address}"
+                          th:if="${#fields.hasErrors('address')}"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Age:</span>
+                    <input required th:field="*{age}" type="number"/>
+                    <span class="text-danger" th:errors="*{age}"
+                          th:if="${#fields.hasErrors('age')}"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Height (cm):</span>
+                    <input required th:field="*{height}" type="number"/>
+                    <span class="text-danger" th:errors="*{height}"
+                          th:if="${#fields.hasErrors('height')}"></span>
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Weight (kg):</span>
+                    <input required th:field="*{weight}" type="number"/>
+                    <span class="text-danger" th:errors="*{weight}"
+                          th:if="${#fields.hasErrors('weight')}"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Gender:</span>
+                    <select th:field="*{gender}">
+                        <option th:value="Male">Male</option>
+                        <option th:value="Female">Female</option>
+                    </select>
+                    <span class="text-danger" th:errors="*{gender}"
+                          th:if="${#fields.hasErrors('gender')}"></span>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
