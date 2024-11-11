@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<style>
+    nav {
+        padding: 20px 5%;
+    }
+
+    .container {
+        border-radius: 20px !important;
+    }
+
+    .page-item.active .page-link {
+        background: brown !important;
+        border-color: brown !important;
+    }
+</style>
+<body>
+<div th:replace="~{fragments/header :: navbar}"></div>
+
+<div class="container">
+    <div class="content">
+        <form method="post" th:action="@{/users/update/submit}"
+              th:object="${user}">
+            <div class="input-box">
+                <input hidden class="hidden-input" th:field="*{id}" type="number"/>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Enter the full name:</span>
+                    <input required th:field="*{fullName}" type="text"/>
+                    <span class="text-danger" th:errors="*{fullName}"
+                          th:if="${#fields.hasErrors('fullName')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Enter the email:</span>
+                    <input required th:field="*{email}" type="email"/>
+                    <span class="text-danger" th:errors="*{email}"
+                          th:if="${#fields.hasErrors('email')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Enter the password:</span>
+                    <input required th:field="*{password}" type="password"/>
+                    <span class="text-danger" th:errors="*{password}"
+                          th:if="${#fields.hasErrors('password')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Enter the address:</span>
+                    <input required th:field="*{address}" type="text"/>
+                    <span class="text-danger" th:errors="*{address}"
+                          th:if="${#fields.hasErrors('address')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Age:</span>
+                    <input required th:field="*{age}" type="number"/>
+                    <span class="text-danger" th:errors="*{age}"
+                          th:if="${#fields.hasErrors('age')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Height (cm):</span>
+                    <input required th:field="*{height}" type="number"/>
+                    <span class="text-danger" th:errors="*{height}"
+                          th:if="${#fields.hasErrors('height')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+
+                <div class="input-box">
+                    <span class="details">Weight (kg):</span>
+                    <input required th:field="*{weight}" type="number"/>
+                    <span class="text-danger" th:errors="*{weight}"
+                          th:if="${#fields.hasErrors('weight')}"></span>
+                </div>
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Gender:</span>
+                    <select th:field="*{gender}">
+                        <option th:value="Male">Male</option>
+                        <option th:value="Female">Female</option>
+                        <option th:value="Other">Other</option>
+                    </select>
+                    <span class="text-danger" th:errors="*{gender}"
+                          th:if="${#fields.hasErrors('gender')}"></span>
+                </div>
+            </div>
+
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Select the role: </span>
+                    <select id="role" name="role" class="form-control">
+                        <option value="" disabled selected>Select role</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="CUSTOMER">Customer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
